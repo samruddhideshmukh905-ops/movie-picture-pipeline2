@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+uwsgi = "==2.0.31"
 flask = "*"
-uwsgi = "*"
 flask-cors = "*"
 pytest = "*"
 
