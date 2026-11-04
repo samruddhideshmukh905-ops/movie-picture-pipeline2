@@ -101,6 +101,13 @@ jobs:
 
       - name: Configure kubectl
         run: aws eks update-kubeconfig --region "${{ vars.AWS_REGION }}" --name "${{ vars.EKS_CLUSTER_NAME }}"
+      - name: Deploy backend
+        working-directory: starter/backend/k8s
+        run: |
+          kustomize edit set image backend="${{ steps.login-ecr.outputs.registry }}/${{ vars.BACKEND_ECR_REPOSITORY }}:${{ github.sha }}"
+          kustomize build | kubectl apply -f -
+
+
 
 
 
