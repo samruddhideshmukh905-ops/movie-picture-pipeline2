@@ -56,6 +56,7 @@ jobs:
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -78,9 +79,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4
+    
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - uses: aws-actions/amazon-ecr-login@v2
@@ -95,7 +98,7 @@ jobs:
         uses: imranismail/setup-kustomize@v2
         with:
           kustomize-version: "5.4.2"
-          
+
       - name: Configure kubectl
         run: aws eks update-kubeconfig --region "${{ vars.AWS_REGION }}" --name "${{ vars.EKS_CLUSTER_NAME }}"
 
