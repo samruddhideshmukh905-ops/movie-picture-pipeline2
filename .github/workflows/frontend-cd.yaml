@@ -1,12 +1,12 @@
 
-name: Frontend CD
+name: Frontend Continuous Deployment
 
 on:
   push:
     branches: [main]
     paths:
       - 'starter/frontend/**'
-      - '.github/workflows/frontend-cd.yml'
+      - '.github/workflows/frontend-cd.yaml'
   workflow_dispatch:
 
 jobs:
